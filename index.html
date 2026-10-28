@@ -89,6 +89,7 @@
     <nav class="site-nav" aria-label="Main">
       <a href="index.html" aria-current="page">Home</a>
       <a href="about.html">About</a>
+      <a href="gallery.html">Gallery</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
@@ -198,7 +199,8 @@
       R = Math.min(H * 0.4, W * 0.27);
     } else {
       // Stacked: globe in the space above the text
-      const top = 72; // clear the navigation
+      const header = document.querySelector(".site-header");
+      const top = header.getBoundingClientRect().bottom - rect.top + 16; // clear the navigation
       const copyTop = copy.getBoundingClientRect().top - rect.top;
       const space = Math.max(copyTop - top - 16, 200);
       R = Math.min(W * 0.42, space * 0.47);

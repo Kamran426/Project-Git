@@ -1,1 +1,330 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gallery | Hello, world.</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8D%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .gallery { padding-top: clamp(40px, 9vw, 112px); }
+
+  .gallery h1 {
+    font-size: clamp(3.5rem, 11vw, 9.5rem);
+    max-width: 11em;
+  }
+
+  .intro {
+    margin: clamp(24px, 3vw, 36px) 0 0;
+    max-width: 34rem;
+    font-size: clamp(1.125rem, 1.6vw, 1.3125rem);
+    line-height: 1.55;
+  }
+
+  .cards {
+    list-style: none;
+    margin: clamp(40px, 7vw, 88px) 0 0;
+    padding: 0;
+    display: grid;
+    gap: clamp(14px, 2vw, 24px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (min-width: 760px)  { .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) { .cards { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+  /* Each card sets its own colours; the script reads --ink, --pin and --pin-edge too */
+  .card {
+    --bg: #f4f3ff;
+    --ink: #2a35d9;
+    --pin: #ffcf3f;
+    --pin-edge: #2a35d9;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 0;
+    padding: clamp(12px, 1.6vw, 22px);
+    border-radius: clamp(16px, 2vw, 24px);
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .tone-sun  { --bg: #ffcf3f; --ink: #161b7a; --pin: #2a35d9; --pin-edge: #f4f3ff; }
+  .tone-deep { --bg: #161d9e; --ink: #f4f3ff; --pin: #ffcf3f; --pin-edge: #161d9e; }
+  .tone-sky  { --bg: #9aa3ff; --ink: #10166b; --pin: #ffcf3f; --pin-edge: #10166b; }
+
+  .card canvas {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+  }
+
+  .card figcaption {
+    margin-top: auto;
+    padding-top: 14px;
+  }
+
+  .w {
+    display: block;
+    text-align: left;
+    white-space: nowrap;
+    font-size: clamp(1.4rem, 2.8vw, 2.75rem);
+    font-weight: 800;
+    font-stretch: 85%;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+  .n {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    opacity: 0.82;
+  }
+
+  /* The last tile invites people to get in touch */
+  .cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    height: 100%;
+    padding: clamp(12px, 1.6vw, 22px);
+    border-radius: clamp(16px, 2vw, 24px);
+    box-shadow: inset 0 0 0 1.5px var(--chalk);
+    color: var(--chalk);
+    text-decoration: none;
+  }
+  .cta .w { white-space: normal; text-wrap: balance; }
+  .cta .n { opacity: 0.9; }
+  .cta .btn { align-self: flex-start; }
+  .cta:hover .btn { background: var(--chalk); color: var(--cobalt); }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="gallery.html" aria-current="page">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="gallery">
+    <h1 class="page-title">Postcards from eleven places.</h1>
+    <p class="intro">One card for each greeting on the home page, with the globe turned to the place where it’s spoken.</p>
+
+    <ul class="cards">
+      <li><figure class="card" data-lat="19.43" data-lon="-99.13">
+        <canvas aria-hidden="true"></canvas>
+        <figcaption><span class="w" lang="es">Hola</span><span class="n">Spanish, Mexico City</span></figcaption>
+      </figure></li>
+
+      <li><figure class="card tone-sun" data-lat="-23.55" data-lon="-46.63">
+        <canvas aria-hidden="true"></canvas>
+        <figcaption><span class="w" lang="pt">Olá</span><span class="n">Portuguese, São Paulo</span></figcaption>
+      </figure></li>
+
+      <li><figure class="card tone-deep" data-lat="14.72" data-lon="-17.47">
+        <canvas aria-hidden="true"></canvas>
+        <figcaption><span class="w" lang="fr">Bonjour</span><span class="n">French, Dakar</span></figcaption>
+      </figure></li>
+
+      <li><figure class="card tone-sky" data-lat="30.04" data-lon="31.24">
+        <canvas aria-hidden="true"></canvas>
+        <figcaption><span class="w" lang="ar" dir="rtl">مرحبا</span><span class="n">Arabic, Cairo</span></figcaption>
+      </figure></li>
+
+      <li><figure class="card tone-deep" data-lat="-1.29" data-lon="36.82">
+        <canvas aria-hidden="true"></canvas>
+        <figcaption><span class="w" lang="sw">Jambo</span><span class="n">Swahili, Nairobi</span></figcaption>
+      </figure></li>
+
+      <li><figure class="card" data-lat="41.01" data-lon="28.98">
+        <canvas aria-hidden="true"></canvas>
+        <figcaption><span class="w" lang="tr">Merhaba</span><span class="n">Turkish, Istanbul</span></figcaption>
+      </figure></li>
+
+      <li><figure class="card tone-sun" data-lat="28.61" data-lon="77.21">
+        <canvas aria-hidden="true"></canvas>
+        <figcaption><span class="w" lang="hi">नमस्ते</span><span class="n">Hindi, Delhi</span></figcaption>
+      </figure></li>
+
+      <li><figure class="card" data-lat="39.90" data-lon="116.40">
+        <canvas aria-hidden="true"></canvas>
+        <figcaption><span class="w" lang="zh">你好</span><span class="n">Mandarin, Beijing</span></figcaption>
+      </figure></li>
+
+      <li><figure class="card tone-sky" data-lat="35.68" data-lon="139.69">
+        <canvas aria-hidden="true"></canvas>
+        <figcaption><span class="w" lang="ja">こんにちは</span><span class="n">Japanese, Tokyo</span></figcaption>
+      </figure></li>
+
+      <li><figure class="card tone-deep" data-lat="-41.29" data-lon="174.78">
+        <canvas aria-hidden="true"></canvas>
+        <figcaption><span class="w" lang="mi">Kia ora</span><span class="n">Māori, Wellington</span></figcaption>
+      </figure></li>
+
+      <li><figure class="card tone-sky" data-lat="51.51" data-lon="-0.13">
+        <canvas aria-hidden="true"></canvas>
+        <figcaption><span class="w" lang="en">Hello</span><span class="n">English, London</span></figcaption>
+      </figure></li>
+
+      <li><a class="cta" href="contact.html">
+        <span>
+          <span class="w">Missing your hello?</span>
+          <span class="n">Tell us your language and where you say it.</span>
+        </span>
+        <span class="btn">Get in touch</span>
+      </a></li>
+    </ul>
+  </main>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  /* ---------- Land mask: 360 x 180 cells, one bit per 1° cell ---------- */
+  const MASK_W = 360, MASK_H = 180;
+  const MASK_B64 = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/P8HAAD//wEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+////P+7///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOD/////////////AAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAPj///////////8PAAAA+v8AAP8AAAAAgD8AAAAAAAAAAAAAAAAAAAAAAAAAHPj//x/8//////8DAADA/z8AAAAAAAAAAP4HAAAAAAAAAAAAAAAAAAAAAAB4/N73//3///////8BAACA/w8AAAAAAAAAAOA/AAAAAAAAAAAAAAAAAAAAAPB8AH34f/D///////8BAAAAfh8AAAAAAAAAAIB+AAAAAAAAAAAAAAAAAAAAAP7v4v//f8D///////8DAAAAOAAAAAAA/gEAAM7/PwAAwAMAAAAAAAAAAAAAAMT/5///DwAA/v////8BAAAAAAAAAAD4HwAA+P//fwAA8P8HAAAAAAAAAAAAgH98APv/HwAA/P////8BAAAAAAAAAAB4AAAA/P//BwAAwJ8DAAAAAAAAAAAAgP+Dz///+wAA+P////8AAAAAAAAAAAAeAALw/////48fgA8AAAAAAAAAAAAAwP9/5//+/wEA8P///z8AAAAAAAAAAIAPAN7+//////8/gP8DAAAABwCAAQAAwP//j//8/w8A8P///z8AAAAAABABAIAPwP////////8///8HAgDAAwD8/xcAnOH///r9//8B4P///38AAAAAAP4PAAA+wN//////////////D0DAAAD////x////f//H//8D4P///wcAAAAAgP//AQAA3////////////////89/B+D/////////P/7Ph/8DgP///wEAAAAA8P//hwf+////////////////////P4D/////////////x/kPwP//DwAAAAAA/P//v/f//////////////////////+H/////////////Afx/wP//AzA5AAAA/v/////////////////////////////////////////fwf8dgP//APh/AAAA/+d//v//////////////////////8eD/////////////7/8XgP8PAPA/AADA//P/////////////////////////AI/////////////zDvgPAP8HAOAHAADw//7///////////////////////9/AMT///////////8D//8HAPwDAAAAAAD+P/7/////////////////////////AOD//////////z8A2H8CAPwDAAAAAAD/P/7///////////////////////8HAPD//////////z8AwH8IAPgBAAAAAAD+f/7/////////////////////8P8BAGD/85D//////z8AwH8cAAAAAAAAAAD+P/z/////////////////////8EUAAAD0BwD8/////38A4P8/AAAAAAAAwAGeP/j//////////////////wEYfAAAAADgDwDA//////8DgP8/AAAAAAAAwAfwH/7/////////////////fwAA/wAAAAD4AgCA//////8PgP9/AAAAAAAA4ANwD/7/////////////////PwCA/wAAAAA/AAAA////////4///AQAAAAAA8APwB/7/////////////////HwCAPwAAAIABAADA////////8///BwAAAAAA+A/w////////////////////3wSAfwAAAAAAAADA/P//////4///HwAAAAAAvB///////////////////////weAHwAAAAAAAACA/f//////5///HwAAAAAAvD///////////////////////w8ABwAAAAAAAAAA8P//////////HwAAAAAAzP///////////////////////w8ABwAAAAAAAAAA+P//////////DAAAAAAAwP///////////////////////w0AAAAAAAAAAAAA+P////////9/fgAAAAAAQPz//////////////////////w0AAAAAAAAAAAAAwP////////8P/wAAAAAAgP///////////////////////xcAAAAAAAAAAAAAgP////////+P/wAAAAAAgP///////3///////////////wQAAAAAAAAAAAAAgP////////+/cAAAAAAAAPz//////x/8////////////fw4AAAAAAAAAAAAAAP//////////AQAAAAAAAPz////z/wf8////////////HwYAAAAAAAAAAAAAAP////////8fAAAAAAAAAPz////j/gP/////////////Dy4AAAAAAAAAAAAAgP///////38GAAAAAAAA/P/v8/8B+Af/////////////Dz8AAAAAAAAAAAAAgP///////z8AAAAAAAAA+H/w5//g4Af8//////////9/gx8AAAAAAAAAAAAAgP///////38AAAAAAAAA/P8wn///+Q/4//////////8/gAsAAAAAAAAAAAAAgP///////x8AAAAAAAAA+B8w/P///x/4//////////8/gAMAAAAAAAAAAAAAAP///////wMAAAAAAAAA/A8w+M///x/8/////////+8PAAMAAAAAAAAAAAAAAP///////wMAAAAAAAAA/B8QP9///w/8/////////ycfgAEAAAAAAAAAAAAAAP7//////wEAAAAAAAAA+A/sH57//x/8/////////38/0AEAAAAAAAAAAAAAAPz//////wEAAAAAAAAA+PP/DI7//z/8/////////3888AEAAAAAAAAAAAAAAPj//////wEAAAAAAAAA4P9/AHjw/////////////w88/wEAAAAAAAAAAAAAAPj//////wAAAAAAAAAA4P9/ABDw/////////////x/cfwAAAAAAAAAAAAAAAOD/////PwAAAAAAAAAA+P//AACA/////////////x/gDwAAAAAAAAAAAAAAAMD/////DwAAAAAAAAAA/P//Dw/A/////////////z/gAwAAAAAAAAAAAAAAAID/////BwAAAAAAAAAA/P//n//f/////////////z/AAAAAAAAAAAAAAAAAAID/////BwAAAAAAAAAA/P///////////////////z8AAAAAAAAAAAAAAAAAAAD///9HDwAAAAAAAAAA/v///////////////////38AAAAAAAAAAAAAAAAAAAD+/x8ADgAAAAAAAACA/////////9///////////z8AAAAAAAAAAAAAAAAAAAD//wcATgAAAAAAAADA/////////7///////////x8AAAAAAAAAAAAAAAAAAADc/wcA7gAAAAAAAADg//////9////+/////////w8AAAAAAAAAAAAAAAAAAAD4/wcAbAAAAAAAAADg//////9////4/////////y8AAAAAAAAAAAAAAAAAAAA4/wcAYAAAAAAAAADw//////9//v8fgP///////zcAAAAAAAAAAAAAAAAAAABg/gcATgAAAAAAAAD4/////////P9/gP///////zMAAAAAAAAAAAAQAAAAAABg/geAfwAAAAAAAAD4////////+f//AP7//////zAAAAAAAAAAAADwAAAAAAAA/Ae8+AEAAAAAAAD8////////+///APz/f///DxAAAAAAAAAAAACAAQAAAAAA/Ac+4AMAAAAAAAD8////////+f9/APz/D/9/BgAAAAAAAAAAAACAAwAAAAAA/A8ewH8AAAAAAAD4////////8/8/APD/A/4/DwAAAAAAAAAAAAAAAQAAAAAA8P8f4P4HAAAAAAD4////////4/8/AOD/APx/B3AAAAAAAAAAAAAAAAAAAAAA4P8PwBAHAAAAAAD4////////5/8fAOD/APx/AHAAAAAAAAAAAAAAAAAAAAAAAP8vAAAAAAAAAAD4////////x/8HAOB/APz/AXgAAAAAAAAAAAAAAAAAAAAAAMz/AQAAAAAAAAD4////////z/8BAOAfAOz/ATgAAAAAAAAAAAAAAAAAAAAAAID/AQAAAAAAAAD8/////////z8AAMAfAOD/AXAAAAAAAAAAAAAAAAAAAAAAAAD/AQAAAAAAAAD4/////////x8AAMAfAMD/A/AAAAAAAAAAAAAAAAAAAAAAAADwAVAAAAAAAAD4/////////8MAAMAPAMD/AzADAAAAAAAAAAAAAAAAAAAAAADgAf4AAAAAAAD4//////////gAAIAPAMD4A+gDAAAAAAAAAAAAAAAAAAAAAADAAf//AAAAAADg//////////8AAAAPAMD4AOwDAAAAAAAAAAAAAAAAAAAAAADAv///AAAAAADg/////////38AAAAfAMBwAMYGAAAAAAAAAAAAAAAAAAAAAAAA////AQAAAADA/////////38AAAA/AMAhAMIHAAAAAAAAAAAAAAAAAAAAAAAA7P//AwAAAACA/////////z8AAAA6AMABAOAHAAAAAAAAAAAAAAAAAAAAAAAAwP//FwAAAAAA/////////z8AAAA4AIAHAMMHAAAAAAAAAAAAAAAAAAAAAAAAwP///wAAAAAA/D/+/////x8AAAAQADgHgA8CAAAAAAAAAAAAAAAAAAAAAAAAwP///wEAAAAAfAf+/////w8AAAAAAHgPwAcAAAAAAAAAAAAAAAAAAAAAAAAAwP///wEAAAAAAADw/////wcAAAAAAPAP8AMAAAAAAAAAAAAAAAAAAAAAAAAA4P///wEAAAAAAADg/////wcAAAAAAOAP+gcIAAAAAAAAAAAAAAAAAAAAAAAA4P///wcAAAAAAADg/////wEAAAAAAMAf/jMaAAAAAAAAAAAAAAAAAAAAAAAA+P///wMAAAAAAADg/////wAAAAAAAIAP//8ZAAAAAAAAAAAAAAAAAAAAAAAA+P///z8AAAAAAADw////fwAAAAAAAAAP/vvYAwAAAAAAAAAAAAAAAAAAAAAA+P////8AAAAAAADw////PwAAAAAAAAAf/vnAZwAAAAAAAAAAAAAAAAAAAAAA+P////8fAAAAAADg////HwAAAAAAAAA//D2w9wMMAAAAAAAAAAAAAAAAAAAA+P////8/AAAAAACA////HwAAAAAAAAB8+Hl+/x84AAAAAAAAAAAAAAAAAAAA/P////9/AAAAAACA////DwAAAAAAAAA8QPkA+z84AAAAAAAAAAAAAAAAAAAA+P//////AQAAAACA////BwAAAAAAAAD4ANgA5D/PAAAAAAAAAAAAAAAAAAAA/P//////AwAAAAAA////DwAAAAAAAADgHwAAxP+HAQAAAAAAAAAAAAAAAAAA8P//////AwAAAAAA////DwAAAAAAAADAfwAAwP8ABwAAAAAAAAAAAAAAAAAA8P//////AQAAAAAA////DwAAAAAAAAAA/H4P4M8BGAAAAAAAAAAAAAAAAAAA4P//////AQAAAAAA////DwAAAAAAAAAAAJ8DAIYHOAAAAAAAAAAAAAAAAAAA4P//////AAAAAAAA/v//HwAAAAAAAAAAAJABAIQHYAAAAAAAAAAAAAAAAAAAwP////9/AAAAAAAA/v//HwAAAAAAAAAAAACAHw4AAAAAAAAAAAAAAAAAAAAAwP////9/AAAAAAAA/v//HzAAAAAAAAAAAADAHw4AAAAAAAAAAAAAAAAAAAAAgP////8/AAAAAAAA////H3gAAAAAAAAAAADsHw4AAAAAAAAAAAAAAAAAAAAAgP////8/AAAAAAAA////H3gAAAAAAAAAAAD+Dz4AAAwAAAAAAAAAAAAAAAAAAP////8/AAAAAACA////H34AAAAAAAAAAAD/Pz4AAAwAAQAAAAAAAAAAAAAAAPz///8fAAAAAACA////H38AAAAAAAAAAID/fz4AAAjAAAAAAAAAAAAAAAAAAPD///8fAAAAAACA////hz8AAAAAAAAAAMD//38AAABgAAAAAAAAAAAAAAAAAOD///8fAAAAAACA////AT8AAAAAAAAAAOD//38AAABgAAAAAAAAAAAAAAAAAOD///8fAAAAAAAA////AD8AAAAAAAAAAPj///8BAAAAAAAAAAAAAAAAAAAAAOD///8PAAAAAAAA/v9/gB8AAAAAAAAAAP////8BAAMAAAAAAAAAAAAAAAAAAOD///8PAAAAAAAA/v//gA8AAAAAAAAAwP////8DAAcAAAAAAAAAAAAAAAAAAOD///8HAAAAAAAA/P//gA8AAAAAAAAA4P////8HAAwAAAAAAAAAAAAAAAAAAOD///8AAAAAAAAA/P//gA8AAAAAAAAA4P////8HAAAAAAAAAAAAAAAAAAAAAOD//z8AAAAAAAAA/P//gA8AAAAAAAAA4P////8fAAAAAAAAAAAAAAAAAAAAAOD//w8AAAAAAAAA/P8/AAcAAAAAAAAA4P////8fAAAAAAAAAAAAAAAAAAAAAOD//w8AAAAAAAAA/P8fAAAAAAAAAAAA4P////8/AAAAAAAAAAAAAAAAAAAAAOD//w8AAAAAAAAA+P8fAAAAAAAAAAAAwP////8/AAAAAAAAAAAAAAAAAAAAAPD//w8AAAAAAAAA8P8fAAAAAAAAAAAAwP////8/AAAAAAAAAAAAAAAAAAAAAPD//wcAAAAAAAAA4P8PAAAAAAAAAAAAgP////8/AAAAAAAAAAAAAAAAAAAAAPD//wMAAAAAAAAA4P8HAAAAAAAAAAAAwP////8/AAAAAAAAAAAAAAAAAAAAAPD//wEAAAAAAAAAwP8HAAAAAAAAAAAAgP////8fAAAAAAAAAAAAAAAAAAAAAPD//wAAAAAAAAAA4P8BAAAAAAAAAAAAgP8P//8fAAAAAAAAAAAAAAAAAAAAAPD//wAAAAAAAAAAwP8AAAAAAAAAAAAAgP8B/P8PAAAAAAAAAAAAAAAAAAAAAPD/fwAAAAAAAAAAwAMAAAAAAAAAAAAAgE8A+P8PAAADAAAAAAAAAAAAAAAAAPj/BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAcA8P8HAAAGAAAAAAAAAAAAAAAAAPj/DwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgP8HAAAOAAAAAAAAAAAAAAAAAPz/BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgP8DAAB8AAAAAAAAAAAAAAAAAPz/BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAB8AAAAAAAAAAAAAAAAAPw/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA+AAAAAAAAAAAAAAAAAPw/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALABAAAbAAAAAAAAAAAAAAAAAP43AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPABAIAfAAAAAAAAAAAAAAAAAP4fAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOABAIADAAAAAAAAAAAAAAAAAP4HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAPADAAAAAAAAAAAAAAAAAP4HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAAAAAP4HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHwAAAAAAAAAAAAAAAAAAP8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAAAAAAAAAAAAAAAAP8HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8HAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8BAAAAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/ABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP6AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPwBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPgHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAAAAAAeAAAAAAAcIAAACAAAAAAAAAAAAAAAAAAAAAAAAAA/AAAAAAAAAAAAAAAAAMA/AAAAGAD//+P//z8AAAAAAAAAAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAAAP7/+wHw/////////38AAAAAAAAAAAAAAAAAAAAAACAfAAAAAAAAAAAAAABg8P///wP8////////////AAAAAAAAAAAAAAAAAAAAAPA/AAAAAAAAAAAI4gD8/////+P/////////////DwAAAAAAAAAAAAAAAAAAAPB/AAAAAAAAIID//////////+P//////////////x8AAAAAAAAAAAAA4AsAAP9/AAAAAAAA//////////////n///////////////8AAAAAAAAAAAAA8A8EAP5/AAAAAADg//////////////////////////////8AAAAAAAAA8D4E8P//////AAAAAAD4/////////////////////////////z8AAAAAAAD+////+P////9/AAAAAAD4/////////////////////////////w8AAAAAAP7///////////8PAAAAAMD//////////////////////////////wEAAABggP////////////8AAAAAgP///////////////////////////////wAAAADg/////////////wcAACAA/P///////////////////////////////wEAAADv/////////////wMAAPwB/////////////////////////////////wcAAAAe/////////////wDAAP8B/////////////////////////////////wAAAAAAAP///////////x/+4f8B/v//////////////////////////////HwAAAACA//////////////+fAP7+////////////////////////////////PwAAAAAA/P///////////////////////////////////////////////////wMAAAQA/P///////////////////////////////////////////////////z8A//8A4P//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////";
+
+  const maskBin = atob(MASK_B64);
+  const maskBits = new Uint8Array(maskBin.length);
+  for (let i = 0; i < maskBin.length; i++) maskBits[i] = maskBin.charCodeAt(i);
+
+  const isLand = (latDeg, lonDeg) => {
+    const x = Math.min(MASK_W - 1, Math.max(0, Math.floor(lonDeg + 180)));
+    const y = Math.min(MASK_H - 1, Math.max(0, Math.floor(90 - latDeg)));
+    const idx = y * MASK_W + x;
+    return (maskBits[idx >> 3] >> (idx & 7)) & 1;
+  };
+
+  /* ---------- Points spread evenly over a sphere ---------- */
+  const D2R = Math.PI / 180, TAU = Math.PI * 2;
+  const N = 5000;
+  const PX = new Float32Array(N), PY = new Float32Array(N), PZ = new Float32Array(N);
+  const LAND = new Uint8Array(N);
+  const golden = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < N; i++) {
+    const y = 1 - 2 * (i + 0.5) / N;
+    const r = Math.sqrt(1 - y * y);
+    const t = i * golden;
+    const x = Math.cos(t) * r, z = Math.sin(t) * r;
+    PX[i] = x; PY[i] = y; PZ[i] = z;
+    LAND[i] = isLand(Math.asin(y) / D2R, Math.atan2(x, z) / D2R);
+  }
+
+  /* ---------- Draw one card's globe ---------- */
+  function drawCard(card) {
+    const canvas = card.querySelector("canvas");
+    const size = canvas.clientWidth;
+    if (!size) return;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = canvas.height = Math.round(size * dpr);
+    const ctx = canvas.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, size, size);
+
+    const css = getComputedStyle(card);
+    const ink = css.getPropertyValue("--ink").trim();
+    const pin = css.getPropertyValue("--pin").trim();
+    const pinEdge = css.getPropertyValue("--pin-edge").trim();
+
+    const cityLat = parseFloat(card.dataset.lat);
+    const cityLon = parseFloat(card.dataset.lon);
+
+    // Turn the globe to face the city, tipped slightly so the city sits just above centre
+    const viewLon = cityLon * D2R;
+    const viewLat = Math.max(-60, Math.min(60, cityLat - 10)) * D2R;
+    const a = -viewLon, b = viewLat;
+    const cA = Math.cos(a), sA = Math.sin(a), cB = Math.cos(b), sB = Math.sin(b);
+
+    const cx = size / 2, cy = size / 2, R = size * 0.46;
+    const spacing = R * Math.sqrt((4 * Math.PI) / N);
+    const rLand = Math.max(spacing * 0.26, 0.7);
+    const rSea = rLand * 0.6;
+
+    const sea = new Path2D();
+    const land = [new Path2D(), new Path2D(), new Path2D(), new Path2D()];
+    const landAlpha = [0.35, 0.55, 0.8, 1];
+
+    for (let i = 0; i < N; i++) {
+      const x = PX[i], y = PY[i], z = PZ[i];
+      const z1 = -x * sA + z * cA;
+      const z2 = y * sB + z1 * cB;
+      if (z2 <= 0.02) continue;
+      const x1 = x * cA + z * sA;
+      const y2 = y * cB - z1 * sB;
+      const sx = cx + R * x1, sy = cy - R * y2;
+      const k = 0.55 + 0.45 * z2;
+
+      if (LAND[i]) {
+        const level = z2 < 0.2 ? 0 : z2 < 0.45 ? 1 : z2 < 0.7 ? 2 : 3;
+        const r = rLand * k;
+        land[level].moveTo(sx + r, sy);
+        land[level].arc(sx, sy, r, 0, TAU);
+      } else {
+        const r = rSea * k;
+        sea.moveTo(sx + r, sy);
+        sea.arc(sx, sy, r, 0, TAU);
+      }
+    }
+
+    ctx.fillStyle = ink;
+    ctx.globalAlpha = 0.2;
+    ctx.fill(sea);
+    for (let l = 0; l < 4; l++) {
+      ctx.globalAlpha = landAlpha[l];
+      ctx.fill(land[l]);
+    }
+
+    // Thin outline of the globe
+    ctx.globalAlpha = 0.25;
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, 0, TAU);
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Marker on the city
+    const lat = cityLat * D2R, lon = cityLon * D2R;
+    const px = Math.cos(lat) * Math.sin(lon), py = Math.sin(lat), pz = Math.cos(lat) * Math.cos(lon);
+    const pz1 = -px * sA + pz * cA;
+    const sx = cx + R * (px * cA + pz * sA);
+    const sy = cy - R * (py * cB - pz1 * sB);
+    const dot = Math.max(4, size * 0.022);
+
+    ctx.globalAlpha = 0.6;
+    ctx.beginPath();
+    ctx.arc(sx, sy, dot * 2.6, 0, TAU);
+    ctx.strokeStyle = ink;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    ctx.globalAlpha = 1;
+    ctx.beginPath();
+    ctx.arc(sx, sy, dot, 0, TAU);
+    ctx.fillStyle = pin;
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = pinEdge;
+    ctx.stroke();
+  }
+
+  const cards = Array.from(document.querySelectorAll(".card[data-lat]"));
+  const observer = new ResizeObserver(entries => {
+    for (const entry of entries) drawCard(entry.target.closest(".card"));
+  });
+  cards.forEach(card => {
+    drawCard(card);
+    observer.observe(card.querySelector("canvas"));
+  });
+})();
+</script>
+</body>
+</html>
