@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact | Hello, world.</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8D%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .contact {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(32px, 5vw, 64px);
+    padding-top: clamp(40px, 9vw, 112px);
+  }
+  @media (min-width: 900px) {
+    .contact {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+
+  .contact h1 { font-size: clamp(3.5rem, 10vw, 8.5rem); }
+
+  .intro {
+    margin: clamp(24px, 3vw, 36px) 0 0;
+    max-width: 28rem;
+    font-size: clamp(1.125rem, 1.6vw, 1.3125rem);
+    line-height: 1.55;
+  }
+
+  form {
+    display: grid;
+    gap: 20px;
+    max-width: 34rem;
+  }
+
+  .field { display: grid; gap: 0.4rem; }
+  label { font-weight: 600; }
+
+  input, textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 1.0625rem;
+    color: var(--chalk);
+    background: rgba(244, 243, 255, 0.08);
+    border: 1.5px solid rgba(244, 243, 255, 0.55);
+    border-radius: 14px;
+    padding: 0.8em 1em;
+  }
+  textarea { min-height: 9rem; resize: vertical; }
+  input:focus, textarea:focus { border-color: var(--sun); }
+  input:-webkit-autofill {
+    -webkit-text-fill-color: var(--chalk);
+    box-shadow: 0 0 0 1000px #3a45e0 inset;
+  }
+
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+  .status { margin: 0; min-height: 1.5em; color: var(--chalk-soft); }
+
+  .direct {
+    margin: 28px 0 0;
+    max-width: 34rem;
+    color: var(--chalk-soft);
+  }
+  .direct a { color: var(--chalk); }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main">
+      <a href="hello-world.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+  </header>
+
+  <main class="contact">
+    <div>
+      <h1 class="page-title">Say hello back.</h1>
+      <p class="intro">Questions, ideas, or just a hello in your own language. Write a few lines and your email app will open with the message ready to send. Curious where this came from? <a class="link" href="about.html">Read the story.</a></p>
+    </div>
+
+    <div>
+      <form id="contact-form">
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Your email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <div class="actions">
+          <button class="btn solid" type="submit">Send message</button>
+          <p class="status" id="status" role="status"></p>
+        </div>
+      </form>
+
+      <p class="direct">Prefer to write directly? Email <a class="link" id="direct" href="mailto:hello@example.com">hello@example.com</a>.</p>
+    </div>
+  </main>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  const form   = document.getElementById("contact-form");
+  const status = document.getElementById("status");
+  const direct = document.getElementById("direct");
+
+  // The address comes from the "Email ..." link above, so change it there.
+  const EMAIL = direct.getAttribute("href").replace(/^mailto:/, "");
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const name    = document.getElementById("name").value.trim();
+    const email   = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    const subject = "Hello from " + name;
+    const body = message + "\n\n" + name + " (" + email + ")";
+
+    window.location.href = "mailto:" + EMAIL +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+
+    status.textContent = "Your email app should open with the message ready to send. If it doesn’t, use the address below.";
+  });
+})();
+</script>
+</body>
+</html>

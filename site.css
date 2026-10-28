@@ -1,0 +1,98 @@
+/* Shared styles for hello-world.html, about.html and contact.html */
+
+:root {
+  --cobalt: #2a35d9;
+  --chalk: #f4f3ff;
+  --sun: #ffcf3f;
+  --chalk-soft: rgba(244, 243, 255, 0.78);
+  --line: rgba(244, 243, 255, 0.32);
+  --pad: clamp(24px, 5vw, 64px);
+  --font: "Bricolage Grotesque", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+          "Helvetica Neue", Arial, "Noto Sans", "Noto Sans Devanagari", "Noto Sans Arabic",
+          "Noto Sans CJK SC", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+body {
+  background: var(--cobalt);
+  color: var(--chalk);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--sun);
+  outline-offset: 3px;
+}
+
+/* Text links inside body copy */
+.link {
+  text-decoration: underline;
+  text-decoration-color: var(--sun);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+.link:hover { text-decoration-color: var(--chalk); }
+
+/* Navigation */
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px clamp(18px, 3vw, 32px);
+}
+.site-nav a {
+  padding: 0.4em 0;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+.site-nav a:hover { border-bottom-color: var(--chalk-soft); }
+.site-nav a[aria-current="page"] { border-bottom-color: var(--sun); }
+
+/* Buttons (works on <button> and <a>) */
+.btn {
+  display: inline-block;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--chalk);
+  background: transparent;
+  border: 1.5px solid var(--chalk);
+  border-radius: 999px;
+  padding: 0.7em 1.3em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.btn:hover { background: var(--chalk); color: var(--cobalt); }
+.btn.solid { background: var(--chalk); color: var(--cobalt); }
+.btn.solid:hover { background: var(--sun); border-color: var(--sun); }
+
+/* Layout and headline shared by the inner pages */
+.page {
+  min-height: 100svh;
+  padding: var(--pad);
+  display: flex;
+  flex-direction: column;
+}
+.page > main { flex: 1; }
+
+.page-title {
+  margin: 0;
+  font-weight: 800;
+  font-stretch: 80%;
+  line-height: 0.88;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+}

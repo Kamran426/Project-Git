@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About | Hello, world.</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%8D%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .about { padding-top: clamp(40px, 9vw, 112px); }
+
+  .about h1 {
+    font-size: clamp(3.5rem, 11vw, 9.5rem);
+    max-width: 11em;
+  }
+
+  .story {
+    margin-top: clamp(28px, 4vw, 48px);
+    max-width: 38rem;
+    font-size: clamp(1.125rem, 1.6vw, 1.3125rem);
+    line-height: 1.55;
+  }
+  .story p { margin: 0 0 1em; }
+
+  .greetings {
+    list-style: none;
+    margin: clamp(48px, 8vw, 96px) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(20px, 3vw, 40px);
+  }
+  @media (min-width: 700px) {
+    .greetings { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+  }
+  .greetings li {
+    border-top: 1.5px solid var(--line);
+    padding: 18px 0 28px;
+  }
+  .greetings .w {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    white-space: nowrap;
+    font-size: clamp(1.75rem, 3.4vw, 3rem);
+    font-weight: 700;
+    font-stretch: 90%;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .greetings .n {
+    display: block;
+    margin-top: 0.3rem;
+    color: var(--chalk-soft);
+    font-size: 1rem;
+  }
+
+  .closing { margin: clamp(24px, 4vw, 40px) 0 0; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Main">
+      <a href="hello-world.html">Home</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="about">
+    <h1 class="page-title">Eleven ways to say hello.</h1>
+
+    <div class="story">
+      <p>This site started as the smallest program there is, a page that says “Hello, world.” Then it got a globe.</p>
+      <p>Each greeting on the home page belongs to a real place. When the word changes, the globe turns to face the city where people say it, and a yellow marker pulses there. The cities are starting points, not borders: Spanish is spoken far beyond Mexico City, and Arabic far beyond Cairo.</p>
+      <p>The globe is about fourteen thousand dots drawn on a canvas, shaped by a simplified public-domain map of the world’s land. There are no cookies, trackers or analytics on any page.</p>
+    </div>
+
+    <ul class="greetings" aria-label="Greetings on the home page">
+      <li><span class="w" lang="es">Hola</span><span class="n">Spanish, Mexico City</span></li>
+      <li><span class="w" lang="pt">Olá</span><span class="n">Portuguese, São Paulo</span></li>
+      <li><span class="w" lang="fr">Bonjour</span><span class="n">French, Dakar</span></li>
+      <li><span class="w" lang="ar" dir="rtl">مرحبا</span><span class="n">Arabic, Cairo</span></li>
+      <li><span class="w" lang="sw">Jambo</span><span class="n">Swahili, Nairobi</span></li>
+      <li><span class="w" lang="tr">Merhaba</span><span class="n">Turkish, Istanbul</span></li>
+      <li><span class="w" lang="hi">नमस्ते</span><span class="n">Hindi, Delhi</span></li>
+      <li><span class="w" lang="zh">你好</span><span class="n">Mandarin, Beijing</span></li>
+      <li><span class="w" lang="ja">こんにちは</span><span class="n">Japanese, Tokyo</span></li>
+      <li><span class="w" lang="mi">Kia ora</span><span class="n">Māori, Wellington</span></li>
+      <li><span class="w" lang="en">Hello</span><span class="n">English, London</span></li>
+    </ul>
+
+    <p class="closing"><a class="btn" href="contact.html">Say hello back</a></p>
+  </main>
+</div>
+</body>
+</html>
